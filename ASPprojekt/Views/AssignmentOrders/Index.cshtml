@@ -1,0 +1,48 @@
+﻿@model IEnumerable<ASPprojekt.Models.AssignmentOrder>
+
+<h1>Aktualnie Wykonywanie Zlecenia</h1>
+
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-primary" style="color: white; text-decoration: none;">Rozpocznij Zlecenie</a>
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MachineID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployeeID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AssignmentDate)
+        </th>
+        <th>Akcje</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MachineID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmployeeID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AssignmentDate)
+            </td>
+            <td>
+                @Html.ActionLink("Edytuj", "Edit", new { id = item.AssignmentOrdersID }, new { @class = "btn btn-warning", style = "color: white; text-decoration: none;" })
+                @Html.ActionLink("Zakończ", "Delete", new { id = item.AssignmentOrdersID }, new { @class = "btn btn-danger", style = "color: white; text-decoration: none;" })
+
+            </td>
+        </tr>
+    }
+</table>
+

@@ -1,0 +1,56 @@
+﻿@model ASPprojekt.Models.ProductionOrder
+
+<h2>Usuń Zlecenie</h2>
+
+<div>
+    <h3>Jesteś pewny, że chcesz usunąć to Zlecenie?</h3>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            ID Zlecenia:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.OrderID)
+        </dd>
+        <dt>
+            ID Produktu:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ProductID)
+        </dd>
+        <dt>
+            Data Rozpoczęcia:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StartDate)
+        </dd>
+        <dt>
+            Data Zakończenia:
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EndDate)
+        </dd>
+    </dl>
+
+    @if (ViewBag.IsProductionOrderInAssignmentOrders == true)
+    {
+        <div class="alert alert-danger" role="alert">
+            To zamówienie jest w trakcie realizacji. Usunięcie go będzie możliwe po zakończeniu produkcji.
+        </div>
+        <a href="@Url.Action("Index")" class="btn btn-secondary">Powrót</a>
+    }
+    else
+    {
+        using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions">
+                <input type="submit" value="Usuń" class="btn btn-danger" />
+                <a href="@Url.Action("Index")" class="btn btn-secondary">Powrót</a>
+            </div>
+        }
+    }
+
+</div>
+

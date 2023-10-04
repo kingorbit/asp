@@ -1,0 +1,68 @@
+﻿@model AssignmentOrder
+
+<h1>Dodaj Nowe Zlecenie</h1>
+
+@using (Html.BeginForm("Create", "AssignmentOrders"))
+{
+    <div class="form-group">
+        @Html.LabelFor(model => model.OrderID)
+        @Html.TextBoxFor(model => model.OrderID, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.OrderID, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.MachineID)
+        @Html.TextBoxFor(model => model.MachineID, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.MachineID, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.EmployeeID)
+        @Html.TextBoxFor(model => model.EmployeeID, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.EmployeeID, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.AssignmentDate)
+        <div class="input-group date" id="datetimepicker" data-target-input="nearest">
+            @Html.TextBoxFor(model => model.AssignmentDate, new { @class = "form-control datetimepicker-input", data_target = "#datetimepicker" })
+            @Html.ValidationMessageFor(model => model.AssignmentDate, "", new { @class = "text-danger" })
+            <div class="input-group-append" data-target="#datetimepicker" data-toggle="datetimepicker">
+                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Dodaj" class="btn btn-primary" />
+        <a href="@Url.Action("Index")" class="btn btn-secondary" style="color: white; text-decoration: none;">Powrót</a>
+    </div>
+
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @ViewBag.ErrorMessage
+        </div>
+    }
+}
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/js/tempusdominus-bootstrap-4.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/css/tempusdominus-bootstrap-4.min.css" />
+
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker').datetimepicker({
+                format: 'YYYY-MM-DD HH:mm',
+                icons: {
+                    time: 'fa fa-clock',
+                    date: 'fa fa-calendar',
+                    up: 'fa fa-chevron-up',
+                    down: 'fa fa-chevron-down',
+                    previous: 'fa fa-chevron-left',
+                    next: 'fa fa-chevron-right',
+                    today: 'fa fa-calendar-check-o',
+                    clear: 'fa fa-trash',
+                    close: 'fa fa-times'
+                }
+            });
+        });
+    </script>
+}

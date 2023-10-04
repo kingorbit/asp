@@ -1,0 +1,48 @@
+﻿@model IEnumerable<ASPprojekt.Models.Employee>
+@inject AppDbContext _context
+
+<h1>Lista Pracowników</h1>
+
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-primary" style="color: white; text-decoration: none;">Dodaj Pracownika</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.EmployeeID)</th>
+            <th>@Html.DisplayNameFor(model => model.FirstName)</th>
+            <th>@Html.DisplayNameFor(model => model.LastName)</th>
+            <th>@Html.DisplayNameFor(model => model.Email)</th>
+            <th>@Html.DisplayNameFor(model => model.Position)</th>
+            <th>Stan</th>
+            <th>Akcje</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.EmployeeID)</td>
+                <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
+                <td>@Html.DisplayFor(modelItem => item.LastName)</td>
+                <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                <td>@Html.DisplayFor(modelItem => item.Position)</td>
+                <td>
+                    @if (_context.AssignmentOrders.Any(a => a.EmployeeID == item.EmployeeID))
+                    {
+                        <button class="btn btn-danger">Zajęty</button>
+                    }
+                    else
+                    {
+                        <button class="btn btn-success">Dostępny</button>
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Edytuj", "Edit", new { id = item.EmployeeID }, new { @class = "btn btn-warning", style = "color: white; text-decoration: none;" })
+                    @Html.ActionLink("Usuń", "Delete", new { id = item.EmployeeID }, new { @class = "btn btn-danger", style = "color: white; text-decoration: none;" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

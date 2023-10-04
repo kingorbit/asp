@@ -1,0 +1,41 @@
+﻿@model ASPprojekt.Models.Product
+
+<h2>Usun Produkt</h2>
+
+<h3>Jesteś pewny że chcesz usunać ten Produkt?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions">
+            <input type="submit" value="Usuń" class="btn btn-danger" />
+            <a href="@Url.Action("Index")" class="btn btn-secondary" style="color: white; text-decoration: none;">Powrót</a>
+
+
+        </div>
+    }
+    
+</div>

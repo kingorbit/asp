@@ -1,0 +1,43 @@
+﻿@model ASPprojekt.Models.Machine
+
+<h2>Usun Maszynę</h2>
+
+<h3>Jesteś pewny, że chcesz usunąć tę Maszynę?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MachineName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.MachineName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+    </dl>
+
+    @if (ViewBag.IsMachineInAssignmentOrders == true)
+    {
+        <div class="alert alert-danger" role="alert">
+            Ta maszyna jest obecnie używana w produkcji. Nie można jej usunąć!
+        </div>
+        <a href="@Url.Action("Index")" class="btn btn-secondary">Powrót</a>
+    }
+    else
+    {
+        using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions">
+                <input type="submit" value="Usuń" class="btn btn-danger" />
+                <a href="@Url.Action("Index")" class="btn btn-secondary">Powrót</a>
+            </div>
+        }
+    }
+
+</div>

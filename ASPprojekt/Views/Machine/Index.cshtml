@@ -1,0 +1,42 @@
+﻿@model List<ASPprojekt.Models.Machine>
+@inject AppDbContext _context
+
+<h1>Maszyny</h1>
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-primary" style="color: white; text-decoration: none;">Dodaj Nowa Maszyne</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nazwa Maszyny</th>
+            <th>Opis Maszyny</th>
+            <th>Stan</th>
+            <th>Akcje</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var machine in Model)
+        {
+            <tr>
+                <td>@machine.MachineID</td>
+                <td>@machine.MachineName</td>
+                <td>@machine.Description</td>
+                <td>
+                    @if (_context.AssignmentOrders.Any(a => a.MachineID == machine.MachineID))
+                    {
+                        <button class="btn btn-danger">W użyciu</button>
+                    }
+                    else
+                    {
+                        <button class="btn btn-success">Wolna</button>
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Edytuj", "Edit", new { id = machine.MachineID }, new { @class = "btn btn-warning", style = "color: white; text-decoration: none;" })
+                    @Html.ActionLink("Usuń", "Delete", new { id = machine.MachineID }, new { @class = "btn btn-danger", style = "color: white; text-decoration: none;" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

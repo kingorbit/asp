@@ -1,0 +1,32 @@
+﻿@model ASPprojekt.Models.AssignmentOrder
+
+<h2>Usuń Zlecenie</h2>
+
+<h3>Jesteś pewny że to zlecenie zostało wykonane?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>ID:</dt>
+        <dd>@Model.AssignmentOrdersID</dd>
+        <dt>ID Zamówienia:</dt>
+        <dd>@Model.OrderID</dd>
+        <dt>ID Maszyny:</dt>
+        <dd>@Model.MachineID</dd>
+        <dt>ID Pracownika:</dt>
+        <dd>@Model.EmployeeID</dd>
+        <dt>Data Wykonania:</dt>
+        <dd>@Model.AssignmentDate</dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions">
+            <input type="submit" value="Usuń" class="btn btn-danger" />
+            <a href="@Url.Action("Index")" class="btn btn-secondary" style="color: white; text-decoration: none;">Powrót</a>
+
+
+        </div>
+    }
+</div>

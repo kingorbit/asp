@@ -1,0 +1,75 @@
+﻿@model ASPprojekt.Models.ProductionOrder
+
+<h2>Edytuj</h2>
+
+@using (Html.BeginForm("Edit", "ProductionOrders", FormMethod.Post, new { @class = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(model => model.OrderID) <!-- Ukryte pole dla OrderID -->
+    <div class="form-group">
+        <label>ID Produktu:</label>
+        @Html.TextBoxFor(model => model.ProductID, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Data rozpoczęcia:</label>
+        <div class="input-group date" id="startDatePicker" data-target-input="nearest">
+            @Html.TextBoxFor(model => model.StartDate, new { @class = "form-control datetimepicker-input", data_target = "#startDatePicker" })
+            <div class="input-group-append" data-target="#startDatePicker" data-toggle="datetimepicker">
+                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Data zakończenia:</label>
+        <div class="input-group date" id="endDatePicker" data-target-input="nearest">
+            @Html.TextBoxFor(model => model.EndDate, new { @class = "form-control datetimepicker-input", data_target = "#endDatePicker" })
+            <div class="input-group-append" data-target="#endDatePicker" data-toggle="datetimepicker">
+                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+            </div>
+        </div>
+    </div>
+
+    <input type="submit" value="Zapisz" class="btn btn-success" style="color: white; text-decoration: none;" />
+    <a href="@Url.Action("Index")" class="btn btn-secondary" style="color: white; text-decoration: none;">Powrót</a>
+}
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/js/tempusdominus-bootstrap-4.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/css/tempusdominus-bootstrap-4.min.css" />
+
+    <script type="text/javascript">
+        $(function () {
+            $('#startDatePicker').datetimepicker({
+                format: 'YYYY-MM-DD HH:mm',
+                icons: {
+                    time: 'fa fa-clock',
+                    date: 'fa fa-calendar',
+                    up: 'fa fa-chevron-up',
+                    down: 'fa fa-chevron-down',
+                    previous: 'fa fa-chevron-left',
+                    next: 'fa fa-chevron-right',
+                    today: 'fa fa-calendar-check-o',
+                    clear: 'fa fa-trash',
+                    close: 'fa fa-times'
+                }
+            });
+
+            $('#endDatePicker').datetimepicker({
+                format: 'YYYY-MM-DD HH:mm',
+                icons: {
+                    time: 'fa fa-clock',
+                    date: 'fa fa-calendar',
+                    up: 'fa fa-chevron-up',
+                    down: 'fa fa-chevron-down',
+                    previous: 'fa fa-chevron-left',
+                    next: 'fa fa-chevron-right',
+                    today: 'fa fa-calendar-check-o',
+                    clear: 'fa fa-trash',
+                    close: 'fa fa-times'
+                }
+            });
+        });
+    </script>
+}
